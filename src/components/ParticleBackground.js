@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ParticleEngine from './particles';
 import blurAsset from '../../static/images/blur.png';
+import chouxAsset from '../../static/images/choux.png';
+import loadImage from '../utils/loadImage';
 
 export default class ParticleBackground extends Component {
   static propTypes = {
@@ -9,9 +11,10 @@ export default class ParticleBackground extends Component {
   }
 
   componentDidMount() {
-    const img = new Image();
-    img.addEventListener('load', () => this.initializeParticles(img));
-    img.src = blurAsset;
+    Promise.all([loadImage(blurAsset), loadImage(chouxAsset)])
+      .then(([blurImg, bgImg]) => {
+        this.initializeParticles(blurImg, bgImg);
+      });
   }
 
   componentWillReceiveProps({ width, height }) {
@@ -27,8 +30,8 @@ export default class ParticleBackground extends Component {
     this.particleEngine = null;
   }
 
-  initializeParticles(image) {
-    this.particleEngine = new ParticleEngine({ canvas: this.canvas, image });
+  initializeParticles(image, bgImage) {
+    this.particleEngine = new ParticleEngine({ canvas: this.canvas, image, bgImage });
     this.particleEngine.start();
   }
 

@@ -4,6 +4,7 @@ import VerticalContainer from './components/VerticalContainer';
 
 import igniteAsset from '../static/images/ignite.svg';
 import zehutAsset from '../static/images/zehut-white.svg';
+
 import '../styles/App.scss';
 
 export default class App extends Component {
@@ -34,7 +35,7 @@ export default class App extends Component {
           </div>
           <div className="header-content">
             <VerticalContainer>
-              <img className="header-logo" src={igniteAsset} width="300"/>
+              <img className="header-logo" src={igniteAsset} />
               <img className="header-zehut" src={zehutAsset} width="80"/>
               <br/>
               <span className="headline">
