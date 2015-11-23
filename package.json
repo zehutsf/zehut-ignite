@@ -20,8 +20,7 @@
       "command": "node ./bin/server.js",
       "env": {
         "NODE_PATH": "./src",
-        "NODE_ENV": "production",
-        "PORT": 80
+        "NODE_ENV": "production"
       }
     },
     "start-dev": {
