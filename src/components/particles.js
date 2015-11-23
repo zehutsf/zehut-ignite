@@ -1,9 +1,9 @@
 import requestAnimationFrame from 'raf';
 
 const OPT_1 = {
-  rate: 0.4,
-  refreshRate: 400,
-  numParticles: 12,
+  rate: 0.34,
+  refreshRate: 300,
+  numParticles: 14,
   sizeRange: [120, 340],
   blendMode: 'screen'
 };
@@ -33,7 +33,7 @@ const OPT_4 = {
 };
 
 const defaultConfig = {
-  colors: ['#fff', '#fff5ce', '#dbaf64']
+  colors: ['#fff', '#fff5ce', '#dbaf64' /* '#ddb066' */]
 };
 
 const CONFIG = Object.assign({}, defaultConfig, OPT_3, OPT_4, OPT_2, OPT_1);
@@ -104,7 +104,13 @@ class Particle {
 }
 
 class Particles {
-  constructor({ canvas, refreshRate = CONFIG.refreshRate * (1 / CONFIG.rate), image }) {
+  constructor({
+    canvas,
+    refreshRate = CONFIG.refreshRate * (1 / CONFIG.rate),
+    image,
+    bgImage
+  }) {
+    this.bgImage = bgImage;
     this.tintedImages = CONFIG.colors.map(color => colorizedImageCanvas(image, color));
     this.refreshRate = refreshRate;
     this.size = { width: canvas.width, height: canvas.height };
@@ -147,13 +153,29 @@ class Particles {
   }
 
   draw() {
-    const ctx = this.canvas.getContext('2d');
+    const ctx = this.context;
+
     ctx.globalCompositeOperation = 'source-over';
     ctx.clearRect(0, 0, this.size.width, this.size.height);
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, this.size.width, this.size.height);
 
     this.particles.forEach(particle => particle.draw(ctx));
+
+    // this.drawBackground();
+  }
+
+  drawBackground() {
+    const ctx = this.context;
+
+    ctx.globalCompositeOperation = 'source-atop';
+    ctx.globalAlpha = 0.1;
+
+    ctx.drawImage(this.bgImage,
+      0, 0,
+      this.bgImage.width, this.bgImage.height,
+      0, 0,
+      this.canvas.width, this.canvas.height);
   }
 
   generateNewParticles(count = CONFIG.numParticles) {
@@ -180,6 +202,7 @@ class Particles {
   }
 
   start() {
+    this.context = this.canvas.getContext('2d');
     this.lastTime = Date.now();
     this.active = true;
     this.updateAndDraw();
