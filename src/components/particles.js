@@ -1,15 +1,42 @@
 import requestAnimationFrame from 'raf';
 
-// Multiplier for animation.
-const RATE = 0.4;
-// How often (in milliseconds) do new particles get generated
-const PARTICLE_REFRESH_RATE = 200;
-// Number of particles to create per generation cycle.
-const NUM_PARTICLES = 12;
-// Min/max range of particle size.
-const PARTICLE_SIZE_RANGE = [80, 220];
-// Colors
-const COLORS = ['#fff', '#fff5ce', '#dbaf65'];
+const OPT_1 = {
+  rate: 0.4,
+  refreshRate: 400,
+  numParticles: 12,
+  sizeRange: [120, 340],
+  blendMode: 'screen'
+};
+
+const OPT_2 = {
+  rate: 0.4,
+  refreshRate: 400,
+  numParticles: 30,
+  sizeRange: [80, 240],
+  blendMode: 'lighter'
+};
+
+const OPT_3 = {
+  rate: 0.7,
+  refreshRate: 800,
+  numParticles: 80,
+  sizeRange: [20, 150],
+  blendMode: 'lighter'
+};
+
+const OPT_4 = {
+  rate: 0.6,
+  refreshRate: 800,
+  numParticles: 40,
+  sizeRange: [170, 240],
+  blendMode: 'screen'
+};
+
+const defaultConfig = {
+  colors: ['#fff', '#fff5ce', '#dbaf64']
+};
+
+const CONFIG = Object.assign({}, defaultConfig, OPT_3, OPT_4, OPT_2, OPT_1);
 
 function colorizedImageCanvas(img, color) {
   const canvas = document.createElement('canvas');
@@ -30,7 +57,7 @@ function randomFromRange(min, max) {
 }
 
 function randomParticleSize(/* viewportWidth */) {
-  return randomFromRange(PARTICLE_SIZE_RANGE[0], PARTICLE_SIZE_RANGE[1]);
+  return randomFromRange(CONFIG.sizeRange[0], CONFIG.sizeRange[1]);
 }
 
 class Particle {
@@ -71,14 +98,14 @@ class Particle {
       this.x, this.y,
       this.size, this.size
     );
-    ctx.globalCompositeOperation = 'screen';
+    ctx.globalCompositeOperation = CONFIG.blendMode;
     // ctx.globalCompositeOperation = 'lighter';
   }
 }
 
 class Particles {
-  constructor({ canvas, refreshRate = PARTICLE_REFRESH_RATE * (1 / RATE), image }) {
-    this.tintedImages = COLORS.map(color => colorizedImageCanvas(image, color));
+  constructor({ canvas, refreshRate = CONFIG.refreshRate * (1 / CONFIG.rate), image }) {
+    this.tintedImages = CONFIG.colors.map(color => colorizedImageCanvas(image, color));
     this.refreshRate = refreshRate;
     this.size = { width: canvas.width, height: canvas.height };
     this.canvas = canvas;
@@ -100,7 +127,7 @@ class Particles {
       y: randomFromRange(-200, -100),
       image: randomImage,
       viewportWidth: this.size.width,
-      rate: RATE
+      rate: CONFIG.rate
     }));
   }
 
@@ -129,7 +156,7 @@ class Particles {
     this.particles.forEach(particle => particle.draw(ctx));
   }
 
-  generateNewParticles(count = NUM_PARTICLES) {
+  generateNewParticles(count = CONFIG.numParticles) {
     for (let index = 0; index < count; index++) {
       this.addParticle();
     }
