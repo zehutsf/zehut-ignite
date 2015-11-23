@@ -16,6 +16,8 @@ export default class ParticleBackground extends Component {
 
   componentWillReceiveProps({ width, height }) {
     if (this.particleEngine) {
+      this.canvas.width = width;
+      this.canvas.height = height;
       this.particleEngine.setSize(width, height);
     }
   }
