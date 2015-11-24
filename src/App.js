@@ -1,21 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import ParticleBackground from './components/ParticleBackground';
 import VerticalContainer from './components/VerticalContainer';
 import NavBar from './components/NavBar';
-
+import { Element } from 'react-scroll';
 // import Sticky from 'react-sticky';
 // import shuffle from 'lodash/collection/shuffle';
 
 import igniteAsset from '../static/images/ignite.svg';
 import zehutAsset from '../static/images/zehut-white.svg';
+import Who from './containers/Who';
+import What from './containers/What';
+import Where from './containers/Where';
 
 import '../styles/App.scss';
 
 export default class App extends Component {
-
-  static propTypes = {
-    children: PropTypes.object.isRequired
-  }
 
   constructor(props) {
     super(props);
@@ -34,7 +33,6 @@ export default class App extends Component {
 
   render() {
     const { width, height } = this.state;
-    const { children } = this.props;
 
     return (
       <div>
@@ -56,7 +54,15 @@ export default class App extends Component {
         </div>
         <div className="content-wrapper">
           <div className="content">
-            {children}
+            <Element name="who">
+              <Who/>
+            </Element>
+            <Element name="what">
+              <What/>
+            </Element>
+            <Element name="where">
+              <Where/>
+            </Element>
           </div>
         </div>
       </div>

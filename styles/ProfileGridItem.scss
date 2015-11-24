@@ -4,6 +4,12 @@
 	display: table;
 }
 
+.profileGrid:after {
+	clear: both;
+	content: " ";
+	display: table;
+}
+
 .profileGridItem {
 	width: (100% - 4% * 3) / 2;
 	margin-left: 4%;
