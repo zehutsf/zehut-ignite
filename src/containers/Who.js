@@ -11,7 +11,10 @@ export default class Who extends Component {
 
   render() {
     return (
-      <div>{this.renderProfiles()}</div>
+      <div>
+        <h3>Featuring</h3>
+        <div>{this.renderProfiles()}</div>
+      </div>
     );
   }
 }

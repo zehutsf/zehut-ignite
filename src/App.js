@@ -42,20 +42,22 @@ export default class App extends Component {
           <div className="header-background">
             <ParticleBackground width={width} height={height}/>
           </div>
-          <div className="header-content">
             <VerticalContainer>
+              <div className="header-content">
               <img className="header-logo" src={igniteAsset} />
               <img className="header-zehut" src={zehutAsset} width="80"/>
               <br/>
               <span className="headline">
-                A special Chanukah event celebrating the stories of our community’s entrepreneurs.
+                A special Chanukah event celebrating our entrepreneurs.
               </span>
-            </VerticalContainer>
-          </div>
+            </div>
+          </VerticalContainer>
           <NavBar />
         </div>
-        <div className="content">
-          {children}
+        <div className="content-wrapper">
+          <div className="content">
+            {children}
+          </div>
         </div>
       </div>
     );

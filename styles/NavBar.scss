@@ -11,9 +11,16 @@
 
 .NavItem {
 	display: inline-block;
-	font-family: "DIN Condensed Light";
+	font-family: "DIN Condensed Medium";
 	font-size: 24px;
-	color: #000;
-	margin: 0 8px;
+	padding: 0px 10px;
+	color: rgba(0, 0, 0, 0.8);
+	// margin: 0 8px;
 	line-height: 50px;
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+}
+
+.NavItem:hover {
+	color: rgba(255, 255, 255, 1);
 }
