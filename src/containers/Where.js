@@ -2,6 +2,6 @@ import React, { Component } from 'react';
 
 export default class Where extends Component {
   render() {
-    return <div>Where</div>;
+    return <div className="section" style={{height: 500}}>Where</div>;
   }
 }

@@ -9,9 +9,7 @@ import path from 'path';
 import Html from './Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import { Router } from 'react-router';
-import createHistory from 'history/lib/createMemoryHistory';
-import createRoutes from './routes';
+import App from './App';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -27,15 +25,9 @@ app.use((req, res) => {
     webpackIsomorphicTools.refresh();
   }
 
-  const component = (
-    <Router history={createHistory()}>
-      {createRoutes()}
-    </Router>
-  );
-
   res.send('<!doctype html>\n' +
     ReactDOM.renderToString(
-      <Html assets={webpackIsomorphicTools.assets()} component={component}/>));
+      <Html assets={webpackIsomorphicTools.assets()} component={<App/>}/>));
 });
 
 if (config.port) {
