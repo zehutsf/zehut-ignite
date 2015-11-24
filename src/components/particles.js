@@ -32,11 +32,29 @@ const OPT_4 = {
   blendMode: 'screen'
 };
 
-const defaultConfig = {
-  colors: ['#fff', '#fff5ce', '#dbaf64' /* '#ddb066' */]
+const OPT_5 = {
+  rate: 0.2,
+  refreshRate: 1000,
+  numParticles: 120,
+  sizeRange: [60, 300],
+  blendMode: 'screen',
+  alphaRange: [0.2, 0.8],
+  colors: ['#ff9600', '#ffd79e'],
+  yRate: [2, 8],
+  xRange: [-5, 5]
 };
 
-const CONFIG = Object.assign({}, defaultConfig, OPT_3, OPT_4, OPT_2, OPT_1);
+const defaultConfig = {
+  colors: ['#fff', '#fff5ce', '#dbaf64' /* '#ddb066' */],
+  alphaRange: [1, 1],
+  yRate: [2, 8],
+  xRate: [-2, 2],
+  refreshRate: 800,
+  alphaDelay: [500, 2000],
+  alphaRate: [0.002, 0.09]
+};
+
+const CONFIG = Object.assign({}, defaultConfig, OPT_3, OPT_4, OPT_2, OPT_1, OPT_5);
 
 function colorizedImageCanvas(img, color) {
   const canvas = document.createElement('canvas');
@@ -64,11 +82,11 @@ class Particle {
   constructor({ rate = 1, x, y, color, image, viewportWidth }) {
     this.color = color;
     this.image = image;
-    this.alpha = 1;
-    this.xRate = randomFromRange(-2, 2) * rate;
-    this.yRate = randomFromRange(2, 8) * rate;
-    this.alphaDelay = randomFromRange(500, 2000) * (1 / rate);
-    this.alphaRate = randomFromRange(0.002, 0.09) * rate;
+    this.alpha = randomFromRange(CONFIG.alphaRange[0], CONFIG.alphaRange[1]);
+    this.xRate = randomFromRange(CONFIG.xRate[0], CONFIG.xRate[1]) * rate;
+    this.yRate = randomFromRange(CONFIG.yRate[0], CONFIG.yRate[1]) * rate;
+    this.alphaDelay = randomFromRange(CONFIG.alphaDelay[0], CONFIG.alphaDelay[1]) / rate;
+    this.alphaRate = randomFromRange(CONFIG.alphaRate[0], CONFIG.alphaRate[1]) * rate;
     this.size = randomParticleSize(viewportWidth);
     this.x = x;
     this.y = y - this.size;
@@ -106,13 +124,12 @@ class Particle {
 class Particles {
   constructor({
     canvas,
-    refreshRate = CONFIG.refreshRate * (1 / CONFIG.rate),
     image,
     bgImage
   }) {
+    this.refreshRate = CONFIG.refreshRate / CONFIG.rate;
     this.bgImage = bgImage;
     this.tintedImages = CONFIG.colors.map(color => colorizedImageCanvas(image, color));
-    this.refreshRate = refreshRate;
     this.size = { width: canvas.width, height: canvas.height };
     this.canvas = canvas;
     this.particles = [];
@@ -129,7 +146,7 @@ class Particles {
     ];
 
     this.particles.push(new Particle({
-      x: randomFromRange(-50, this.size.width),
+      x: randomFromRange(this.size.width * -0.8, this.size.width),
       y: randomFromRange(-200, -100),
       image: randomImage,
       viewportWidth: this.size.width,
@@ -178,7 +195,8 @@ class Particles {
       this.canvas.width, this.canvas.height);
   }
 
-  generateNewParticles(count = CONFIG.numParticles) {
+  generateNewParticles() {
+    const count = CONFIG.numParticles;
     for (let index = 0; index < count; index++) {
       this.addParticle();
     }
