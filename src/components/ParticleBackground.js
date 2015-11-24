@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ParticleEngine from './particles';
-import blurAsset from '../../static/images/blur.png';
+import blurAsset from '../../static/images/blur-2.png';
 import chouxAsset from '../../static/images/choux.png';
 import loadImage from '../utils/loadImage';
 
