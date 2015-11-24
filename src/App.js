@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import ParticleBackground from './components/ParticleBackground';
 import VerticalContainer from './components/VerticalContainer';
+import ProfileGridItem from './components/ProfileGridItem';
+import NavBar from './components/NavBar';
+import shuffle from 'lodash/collection/shuffle';
 
 import igniteAsset from '../static/images/ignite.svg';
 import zehutAsset from '../static/images/zehut-white.svg';
+
+import data from './data';
 
 import '../styles/App.scss';
 
@@ -12,7 +17,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {width: 0, height: 500};
+    this.profiles = shuffle(data.profiles);
+    this.state = {width: 0, height: 520};
   }
 
   componentDidMount() {
@@ -22,6 +28,12 @@ export default class App extends Component {
 
   handleResize() {
     this.setState({ width: window.innerWidth });
+  }
+
+  renderProfiles() {
+    return this.profiles.map(profile => (
+      <ProfileGridItem key={profile.name} {...profile}/>
+    ));
   }
 
   render() {
@@ -43,6 +55,10 @@ export default class App extends Component {
               </span>
             </VerticalContainer>
           </div>
+          <NavBar />
+        </div>
+        <div className="content">
+          {this.renderProfiles()}
         </div>
       </div>
     );

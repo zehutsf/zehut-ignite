@@ -32,13 +32,16 @@ const OPT_4 = {
   blendMode: 'screen'
 };
 
+// TODO:
+// Make size related properties proportional to a base width.
 const OPT_5 = {
   rate: 0.2,
-  refreshRate: 1000,
-  numParticles: 120,
-  sizeRange: [60, 300],
+  refreshRate: 800,
+  numParticles: 100,
+  sizeRange: [120, 240],
   blendMode: 'screen',
   alphaRange: [0.2, 0.8],
+  alphaDelay: [500, 2000],
   colors: ['#ff9600', '#ffd79e'],
   yRate: [2, 8],
   xRange: [-5, 5]
@@ -54,7 +57,13 @@ const defaultConfig = {
   alphaRate: [0.002, 0.09]
 };
 
+const BASE_WIDTH = 1000;
+
 const CONFIG = Object.assign({}, defaultConfig, OPT_3, OPT_4, OPT_2, OPT_1, OPT_5);
+
+function proportional(n1, d1, d2) {
+  return (n1 * d2) / d1;
+}
 
 function colorizedImageCanvas(img, color) {
   const canvas = document.createElement('canvas');
@@ -78,6 +87,10 @@ function randomParticleSize(/* viewportWidth */) {
   return randomFromRange(CONFIG.sizeRange[0], CONFIG.sizeRange[1]);
 }
 
+const proportionalProps = [
+  'size'
+];
+
 class Particle {
   constructor({ rate = 1, x, y, color, image, viewportWidth }) {
     this.color = color;
@@ -88,6 +101,15 @@ class Particle {
     this.alphaDelay = randomFromRange(CONFIG.alphaDelay[0], CONFIG.alphaDelay[1]) / rate;
     this.alphaRate = randomFromRange(CONFIG.alphaRate[0], CONFIG.alphaRate[1]) * rate;
     this.size = randomParticleSize(viewportWidth);
+
+    proportionalProps.forEach(prop => {
+      this[prop] = proportional(
+        this[prop],
+        BASE_WIDTH,
+        Math.min(viewportWidth, BASE_WIDTH)
+      );
+    });
+
     this.x = x;
     this.y = y - this.size;
   }
@@ -196,7 +218,11 @@ class Particles {
   }
 
   generateNewParticles() {
+    // const count = proportional(
+    //   CONFIG.numParticles, BASE_WIDTH, this.canvas.width
+    // );
     const count = CONFIG.numParticles;
+
     for (let index = 0; index < count; index++) {
       this.addParticle();
     }

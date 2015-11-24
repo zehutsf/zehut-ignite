@@ -1,0 +1,66 @@
+.profileGridRow:after {
+	clear: both;
+	content: " ";
+	display: table;
+}
+
+.profileGridItem {
+	width: (100% - 4% * 3) / 2;
+	margin-left: 4%;
+	position: relative;
+	display: inline-block;
+	float: left;
+	margin-bottom: 50px;
+
+	@media (max-width: 600px) {
+		width: 100%;
+		margin: 0;
+	}
+}
+
+.profileGridItem-image {
+	height: 150px;
+	width: 100%;
+	position: relative;
+	text-align: center;
+
+	img {
+		position: relative;
+		display: inline-block;
+		width: 100%;
+		max-width: 200px;
+		margin: 0 auto;
+	}
+}
+
+.profileGridItem-content {
+	width: 100%;
+}
+
+.profileGridItem-title {
+	width: 100%;
+	text-align: center;
+}
+
+.profileGridItem-name {
+	font-family: "DIN Condensed Light";
+	font-size: 36px;
+	color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+	// border-top: 1px solid rgba(255, 255, 255, 0.4);
+	padding: 10px 20px;
+}
+
+.profileGridItem-body {
+	opacity: 0.8;
+	font-family: "DIN Condensed Light";
+	font-size: 18px;
+	color: #fff;
+	display: block;
+}
+
+
