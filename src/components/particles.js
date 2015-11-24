@@ -1,51 +1,5 @@
 import requestAnimationFrame from 'raf';
-
-const OPT_1 = {
-  rate: 0.34,
-  refreshRate: 300,
-  numParticles: 14,
-  sizeRange: [120, 340],
-  blendMode: 'screen'
-};
-
-const OPT_2 = {
-  rate: 0.4,
-  refreshRate: 400,
-  numParticles: 30,
-  sizeRange: [80, 240],
-  blendMode: 'lighter'
-};
-
-const OPT_3 = {
-  rate: 0.7,
-  refreshRate: 800,
-  numParticles: 80,
-  sizeRange: [20, 150],
-  blendMode: 'lighter'
-};
-
-const OPT_4 = {
-  rate: 0.6,
-  refreshRate: 800,
-  numParticles: 40,
-  sizeRange: [170, 240],
-  blendMode: 'screen'
-};
-
-// TODO:
-// Make size related properties proportional to a base width.
-const OPT_5 = {
-  rate: 0.2,
-  refreshRate: 800,
-  numParticles: 100,
-  sizeRange: [120, 240],
-  blendMode: 'screen',
-  alphaRange: [0.2, 0.8],
-  alphaDelay: [500, 2000],
-  colors: ['#ff9600', '#ffd79e'],
-  yRate: [2, 8],
-  xRange: [-5, 5]
-};
+import particleConfigs from './particles-config';
 
 const defaultConfig = {
   colors: ['#fff', '#fff5ce', '#dbaf64' /* '#ddb066' */],
@@ -59,7 +13,7 @@ const defaultConfig = {
 
 const BASE_WIDTH = 1000;
 
-const CONFIG = Object.assign({}, defaultConfig, OPT_3, OPT_4, OPT_2, OPT_1, OPT_5);
+const CONFIG = Object.assign({}, defaultConfig, particleConfigs[6]);
 
 function proportional(n1, d1, d2) {
   return (n1 * d2) / d1;
@@ -88,7 +42,7 @@ function randomParticleSize(/* viewportWidth */) {
 }
 
 const proportionalProps = [
-  'size'
+  // 'size'
 ];
 
 class Particle {

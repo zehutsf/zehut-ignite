@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ParticleBackground from './components/ParticleBackground';
 import VerticalContainer from './components/VerticalContainer';
-import ProfileGridItem from './components/ProfileGridItem';
 import NavBar from './components/NavBar';
-import shuffle from 'lodash/collection/shuffle';
+
+// import Sticky from 'react-sticky';
+// import shuffle from 'lodash/collection/shuffle';
 
 import igniteAsset from '../static/images/ignite.svg';
 import zehutAsset from '../static/images/zehut-white.svg';
-
-import data from './data';
 
 import '../styles/App.scss';
 
 export default class App extends Component {
 
+  static propTypes = {
+    children: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props);
 
-    this.profiles = shuffle(data.profiles);
     this.state = {width: 0, height: 520};
   }
 
@@ -30,14 +32,9 @@ export default class App extends Component {
     this.setState({ width: window.innerWidth });
   }
 
-  renderProfiles() {
-    return this.profiles.map(profile => (
-      <ProfileGridItem key={profile.name} {...profile}/>
-    ));
-  }
-
   render() {
     const { width, height } = this.state;
+    const { children } = this.props;
 
     return (
       <div>
@@ -58,7 +55,7 @@ export default class App extends Component {
           <NavBar />
         </div>
         <div className="content">
-          {this.renderProfiles()}
+          {children}
         </div>
       </div>
     );
