@@ -4,11 +4,19 @@
 import 'babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import createRoutes from './routes';
+import createHistory from 'history/lib/createBrowserHistory';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
+import Router from 'react-router';
 
 const dest = document.getElementById('content');
 
-ReactDOM.render(<App/>, dest);
+const history = useScroll(createHistory)();
+
+ReactDOM.render(
+  <Router history={history}>
+    {createRoutes()}
+  </Router>, dest);
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger

@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import '../../styles/NavBar.scss';
 
 const NAV_ITEMS = [
-  'WHO', 'WHAT', 'WHERE'
+  {
+    title: 'WHO',
+    url: '/'
+  },
+  {
+    title: 'WHAT',
+    url: '/what'
+  },
+  {
+    title: 'WHERE',
+    url: '/where'
+  }
 ];
 
 export default class NavBar extends Component {
   renderNavItems() {
     return NAV_ITEMS.map(item => (
-      <a className="NavItem">{item}</a>
+      <Link activeClassName="NavItem-active"
+        to={item.url} className="NavItem">{item.title}</Link>
     ));
   }
 
