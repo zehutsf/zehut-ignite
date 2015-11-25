@@ -20,10 +20,7 @@ export default class Who extends Component {
                 Join us at an after work cocktail party and meetup, featuring a DJ spinning vinyl, Vodka + Latke Bar, Menorah lighting.
               </p>
               <p>
-                Our mission is to use the power of community to foster personal and professional development for people with ideas.
-              </p>
-              <p>
-                Startups featuring leaders from our Young Adult community will be on display.
+                Our mission is to use the power of community to foster personal and professional development for people with ideas. Startups featuring leaders from our Young Adult community will be on display.
               </p>
           </div>
         </div>
