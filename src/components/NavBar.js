@@ -31,13 +31,13 @@ const NAV_ITEMS = [
     title: 'WHERE',
     url: 'where',
     offset: -150,
-  },
-  {
-    title: 'REGISTER',
-    url: 'register',
-    className: 'NavItem-cta',
-    offset: -100
   }
+  // {
+  //   title: 'REGISTER',
+  //   url: 'register',
+  //   className: 'NavItem-cta',
+  //   offset: -100
+  // }
 ];
 
 export default class NavBar extends Component {
