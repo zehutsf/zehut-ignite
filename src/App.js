@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import DocumentMeta from 'react-document-meta';
 import Header from './components/Header';
 import ProfileGrid from './components/ProfileGrid';
 import { Element } from 'react-scroll';
 
 import data from './data';
+import config from './config';
 
 import '../styles/App.scss';
 
@@ -90,6 +92,7 @@ located at Westfield San Francisco in the epicenter of downtown.
   render() {
     return (
       <div>
+        <DocumentMeta {...config.app}/>
         <Element name="home">
           <Header/>
         </Element>
