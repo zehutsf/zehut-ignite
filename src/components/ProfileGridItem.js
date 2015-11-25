@@ -10,7 +10,7 @@ export default class ProfileGridItem extends Component {
   }
 
   render() {
-    const { image, name } = this.props;
+    const { image, name, body } = this.props;
 
     return (
       <div className="profileGridItem">
@@ -26,7 +26,7 @@ export default class ProfileGridItem extends Component {
             </span>
           </div>
           <span className="profileGridItem-body">
-            {/* body */}
+            {body}
           </span>
         </div>
       </div>

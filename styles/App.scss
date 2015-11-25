@@ -50,15 +50,6 @@ body {
 	display: block;
 }
 
-.headline {
-	font-family: 'DIN Condensed Medium';
-	font-size: 30px;
-	text-transform: none;
-	color: #fff;
-	text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
-	display: block;
-	margin-top: 40px;
-}
 
 .content-wrapper {
 	width: 100%;
@@ -117,10 +108,13 @@ $gradient-color-end-str: '#00ab7200';
 	font-size: 36px;
 }
 
-.section-body {
+.section-content {
 	margin: 0 auto;
 	width: 100%;
 	max-width: 600px;
+}
+
+.section-body {
 	text-align: left;
 	font-family: 'DIN Light';
 	font-size: 18px;
@@ -130,4 +124,17 @@ $gradient-color-end-str: '#00ab7200';
 	p {
 		margin-bottom: 40px;
 	}
+}
+
+.section-headline {
+	text-align: center;
+	font-family: 'DIN Condensed Light';
+	font-size: 36px;
+	text-transform: uppercase;
+	color: #fff;
+	text-shadow: 0px 0px 4px rgba(0,0,0,0.5);
+	display: block;
+	padding: 10px 0px 20px 0px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	margin-bottom: 40px;
 }
