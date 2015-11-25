@@ -12,7 +12,49 @@
 }
 
 .NavBar-sticky {
-	background: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 209, 0.9);
+}
+
+.NavBar-logo {
+	font-family: "DIN Condensed Bold";
+	font-size: 30px;
+	line-height: 50px;
+	padding: 0px 10px;
+	float: left;
+	display: none;
+}
+
+.NavBar-logo-date {
+	font-family: "DIN Condensed Light";
+}
+
+.NavBar-sticky .NavBar-logo {
+	display: inline-block;
+	float: left;
+}
+
+.NavBar-logo a {
+	cursor: pointer;
+}
+
+.NavBar-items {
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.NavBar-sticky .NavBar-items {
+	@media (max-width: 500px) {
+		float: right;
+		width: auto;
+		margin: none;
+	}
+}
+
+.NavBar-sticky .NavItem {
+	@media (max-width: 500px) {
+		font-size: 18px;
+	}
 }
 
 .NavItem {
@@ -26,6 +68,7 @@
 	text-decoration: none;
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
+
 }
 
 .NavItem.active {

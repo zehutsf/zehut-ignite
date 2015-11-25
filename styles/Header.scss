@@ -1,0 +1,40 @@
+.header-background {
+	position: absolute;
+	top: 0; left: 0;
+	position: fixed;
+}
+
+.header {
+	position: relative;
+	width: 100%;
+	height: 520px;
+}
+
+.header-content {
+	position: relative;
+	width: 100%;
+	// Move above the background canvas.
+	transform: translate3d(0, 0, 0);
+	text-align: center;
+	max-width: 600px;
+	padding: 0px 20px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	margin-bottom: 50px;
+}
+
+.header-logo {
+	margin: 0 auto;
+	width: 100%;
+	padding: 0 20px;
+	box-sizing: border-box;
+	max-width: 420px;
+	display: block;
+}
+
+.header-zehut {
+	margin: 0 auto;
+	width: 100px;
+	margin-top: 20px;
+	display: block;
+}
