@@ -1,5 +1,4 @@
 import requestAnimationFrame from 'raf';
-import particleConfigs from './particles-config';
 
 const defaultConfig = {
   colors: ['#fff', '#fff5ce', '#dbaf64' /* '#ddb066' */],
@@ -11,9 +10,20 @@ const defaultConfig = {
   alphaRate: [0.002, 0.09]
 };
 
+const newConfig = {
+  rate: 0.2,
+  refreshRate: 800,
+  numParticles: 60,
+  sizeRange: [170, 240],
+  alphaRange: [0.2, 1],
+  alphaDelay: [750, 2000],
+  colors: ['#ff9600', '#ffd79e'],
+  blendMode: 'screen'
+};
+
 const BASE_WIDTH = 1000;
 
-const CONFIG = Object.assign({}, defaultConfig, particleConfigs[6]);
+const CONFIG = Object.assign({}, defaultConfig, newConfig);
 
 function proportional(n1, d1, d2) {
   return (n1 * d2) / d1;
