@@ -9,52 +9,11 @@ body {
 	letter-spacing: 0.2px;
 }
 
-.header-background {
-	position: absolute;
-	top: 0; left: 0;
-	position: fixed;
-}
-
-.header {
-	position: relative;
-	width: 100%;
-	height: 520px;
-}
-
-.header-content {
-	position: relative;
-	width: 100%;
-	// Move above the background canvas.
-	transform: translate3d(0, 0, 0);
-	text-align: center;
-	max-width: 600px;
-	padding: 0px 20px;
-	margin: 0 auto;
-	box-sizing: border-box;
-	margin-bottom: 50px;
-}
-
-.header-logo {
-	margin: 0 auto;
-	width: 100%;
-	padding: 0 20px;
-	box-sizing: border-box;
-	max-width: 420px;
-	display: block;
-}
-
-.header-zehut {
-	margin: 0 auto;
-	width: 100px;
-	margin-top: 20px;
-	display: block;
-}
-
-
 .content-wrapper {
 	width: 100%;
 	background: rgba(0, 0, 0, 1);
 	transform: translate3d(0, 0, 0);
+	padding: 40px 0px;
 }
 
 .content {
@@ -85,20 +44,6 @@ $gradient-color-end-str: '#00ab7200';
 .section {
 	position: relative;
 	padding: 40px 0px;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ab7200+0,ab7200+100&0.2+0,0+100 */
-	// background: -moz-linear-gradient(top, $gradient-color-start 0%, $gradient-color-end 100%); /* FF3.6-15 */
-	// background: -webkit-linear-gradient(top, $gradient-color-start 0%,$gradient-color-end 100%); /* Chrome10-25,Safari5.1-6 */
-	// background: linear-gradient(to bottom, $gradient-color-start 0%,$gradient-color-end 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$gradient-color-start-str, endColorstr=$gradient-color-end-str,GradientType=0 ); /* IE6-9 */
-}
-
-.section:after {
-	// content: " ";
-	// display: block;
-	// width: 80%;
-	// padding-bottom: 10px;
-	// border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-	// margin: 0 auto;
 }
 
 .section-title {
@@ -111,7 +56,9 @@ $gradient-color-end-str: '#00ab7200';
 .section-content {
 	margin: 0 auto;
 	width: 100%;
-	max-width: 600px;
+	max-width: 620px;
+	box-sizing: border-box;
+	padding: 0 20px;
 }
 
 .section-body {
@@ -137,4 +84,12 @@ $gradient-color-end-str: '#00ab7200';
 	padding: 10px 0px 20px 0px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 	margin-bottom: 40px;
+	line-height: 1.4;
+}
+
+.headline-sub {
+	margin: 12px 0px;
+	color: #F7EED9;
+	// color: rgba(255, 255, 209, 1);
+	font-size: 28px;
 }
