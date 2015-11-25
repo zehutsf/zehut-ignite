@@ -17,8 +17,8 @@ const APP_DESCRIPTION = 'A party showcasing startups and entrepreneurs ' +
   'Startups featuring leaders from our Young Adult community ' +
   'will be on display.';
 
-const APP_URL = 'http://zehutignite.com';
-const APP_IMAGE = 'http://zehutignite.com/images/ignite-og.jpg';
+const APP_URL = 'http://www.zehutignite.com';
+const APP_IMAGE = 'http://www.zehutignite.com/images/ignite-og.jpg';
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
@@ -26,7 +26,6 @@ module.exports = Object.assign({
   app: {
     title: APP_TITLE,
     description: APP_DESCRIPTION,
-    canonical: APP_URL,
     meta: {
       charSet: 'utf-8',
       property: {
