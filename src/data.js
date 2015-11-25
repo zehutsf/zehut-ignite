@@ -1,4 +1,5 @@
 export default {
+  ticketUrl: 'http://zehutignite.eventbrite.com',
   profiles: [
     {
       name: 'Vadim Ogievetsky',
