@@ -19,20 +19,24 @@ Sticky.prototype.getInitialState = function() { // eslint-disable-line func-name
 const NAV_ITEMS = [
   {
     title: 'WHAT',
-    url: 'what'
+    url: 'what',
+    offset: -100
   },
   {
     title: 'WHO',
-    url: 'who'
+    url: 'who',
+    offset: -50
   },
   {
     title: 'WHERE',
-    url: 'where'
+    url: 'where',
+    offset: -150,
   },
   {
     title: 'REGISTER',
     url: 'register',
-    className: 'NavItem-cta'
+    className: 'NavItem-cta',
+    offset: -100
   }
 ];
 
@@ -42,7 +46,7 @@ export default class NavBar extends Component {
       const className = cx('NavItem', item.className);
       return (
         <Link key={item.url} activeClassName="NavItem-active"
-          to={item.url} spy smooth offset={-75}
+          to={item.url} spy smooth offset={item.offset}
           className={className}>{item.title}</Link>
       );
     });
@@ -52,7 +56,7 @@ export default class NavBar extends Component {
     return (
       <Sticky className="NavBar" stickyClass="NavBar-sticky" topOffset={-50}>
         <div className="NavBar-logo">
-          IGNITE
+          <Link to="home" smooth>IGNITE <span className="NavBar-logo-date">DEC 9</span></Link>
         </div>
         <div className="NavBar-items">
           {this.renderNavItems()}

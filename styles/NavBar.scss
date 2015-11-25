@@ -24,9 +24,17 @@
 	display: none;
 }
 
+.NavBar-logo-date {
+	font-family: "DIN Condensed Light";
+}
+
 .NavBar-sticky .NavBar-logo {
 	display: inline-block;
 	float: left;
+}
+
+.NavBar-logo a {
+	cursor: pointer;
 }
 
 .NavBar-items {

@@ -13,7 +13,7 @@ body {
 	width: 100%;
 	background: rgba(0, 0, 0, 1);
 	transform: translate3d(0, 0, 0);
-	padding: 40px 0px;
+	padding: 40px 0px 80px 0px;
 }
 
 .content {
@@ -92,4 +92,26 @@ $gradient-color-end-str: '#00ab7200';
 	color: #F7EED9;
 	// color: rgba(255, 255, 209, 1);
 	font-size: 28px;
+}
+
+.button-cta {
+	text-decoration: none;
+	font-family: 'DIN Condensed Light';
+	font-size: 24px;
+	text-transform: uppercase;
+	color: rgba(255, 255, 209, 1);
+	border: rgba(255, 255, 209, 1) 1px solid;
+	border-radius: 30px;
+	padding: 10px 20px;
+	display: inline-block;
+	transition: all 0.1s ease-in-out;
+}
+
+.button-cta:hover {
+	background: rgba(255, 255, 209, 1);
+	color: #000;
+}
+
+.center {
+	text-align: center;
 }

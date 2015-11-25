@@ -50,6 +50,9 @@ export default class App extends Component {
         <div className="section-content">
           <div className="section-headline">
             Join us at Bespoke
+            <div className="headline-sub">
+              845 MARKET STREET, 4th FLOOR
+            </div>
           </div>
           <div className="section-body">
             <p>
@@ -62,15 +65,27 @@ located at Westfield San Francisco in the epicenter of downtown.
     );
   }
 
+  renderRegister() {
+    return (
+      <Element name="register">
+        <div className="section-content center">
+          <a href="#" className="button-cta">GET TICKETS</a>
+        </div>
+      </Element>
+    );
+  }
+
   render() {
     return (
       <div>
-        <Header/>
+        <Element name="home">
+          <Header/>
+        </Element>
         <div className="content-wrapper">
           {this.renderWhat()}
           {this.renderWho()}
           {this.renderWhere()}
-          <Element name="register" />
+          {this.renderRegister()}
         </div>
       </div>
     );
