@@ -109,6 +109,7 @@ class Particles {
     this.size = { width: canvas.width, height: canvas.height };
     this.canvas = canvas;
     this.particles = [];
+    this.first = true;
     this.generateNewParticles();
   }
 
@@ -120,10 +121,9 @@ class Particles {
     const randomImage = this.tintedImages[
       Math.floor(randomFromRange(0, this.tintedImages.length))
     ];
-
     this.particles.push(new Particle({
       x: randomFromRange(this.size.width * -0.8, this.size.width),
-      y: randomFromRange(-200, -100),
+      y: this.first ? randomFromRange(0, this.size.height * 0.5) : randomFromRange(-200, -100),
       image: randomImage,
       viewportWidth: this.size.width,
       rate: CONFIG.rate
@@ -180,6 +180,8 @@ class Particles {
     for (let index = 0; index < count; index++) {
       this.addParticle();
     }
+
+    this.first = false;
   }
 
   updateAndDraw() {

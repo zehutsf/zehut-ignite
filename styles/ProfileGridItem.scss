@@ -23,24 +23,20 @@
 }
 
 .profileGridItem {
-	@include cols(4, 2%);
+	@include cols(3, 4%);
 	position: relative;
 	display: inline-block;
 	float: left;
 	margin-bottom: 20px;
 
 	@media (max-width: 800px) {
-		@include cols(3, 2%);
+		@include cols(3, 3%);
 	}
 
 	@media (max-width: 600px) {
-		@include cols(2, 2%)
+		@include cols(2, 3%)
 	}
 
-	@media (max-width: 400px) {
-		// width: 100%;
-		// margin: 0;
-	}
 }
 
 .profileGridItem-image {
@@ -78,6 +74,12 @@
 	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 	// border-top: 1px solid rgba(255, 255, 255, 0.4);
 	padding: 4px 4px;
+
+	@media (max-width: 400px) {
+		// width: 100%;
+		// margin: 0;
+		font-size: 18px;
+	}
 }
 
 .profileGridItem-body {
@@ -86,6 +88,8 @@
 	font-size: 18px;
 	color: #fff;
 	display: block;
+	text-align: center;
+	min-height: 75px;
 }
 
 
