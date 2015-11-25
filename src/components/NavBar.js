@@ -28,7 +28,7 @@ const NAV_ITEMS = [
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {sticky: true};
+    this.state = {sticky: false};
   }
 
   componentDidMount() {
