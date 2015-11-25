@@ -9,7 +9,6 @@ import { Element } from 'react-scroll';
 import igniteAsset from '../static/images/ignite.svg';
 import zehutAsset from '../static/images/zehut-white.svg';
 import Who from './containers/Who';
-import What from './containers/What';
 import Where from './containers/Where';
 
 import '../styles/App.scss';
@@ -19,7 +18,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {width: 0, height: 520};
+    this.state = {width: '100%', height: 520};
   }
 
   componentDidMount() {
@@ -46,24 +45,19 @@ export default class App extends Component {
               <img className="header-zehut" src={zehutAsset} width="80"/>
               <br/>
               <span className="headline">
-                A special Chanukah event celebrating our entrepreneurs.
+                A party showcasing startups and entrepreneurs in our community on Chanukah.
               </span>
             </div>
           </VerticalContainer>
           <NavBar />
         </div>
         <div className="content-wrapper">
-          <div className="content">
             <Element name="who">
               <Who/>
-            </Element>
-            <Element name="what">
-              <What/>
             </Element>
             <Element name="where">
               <Where/>
             </Element>
-          </div>
         </div>
       </div>
     );
