@@ -47,8 +47,6 @@ const proportionalProps = [
 
 class Particle {
   constructor({ rate = 1, x, y, color, image, viewportWidth }) {
-    this.color = color;
-    this.image = image;
     this.alpha = randomFromRange(CONFIG.alphaRange[0], CONFIG.alphaRange[1]);
     this.xRate = randomFromRange(CONFIG.xRate[0], CONFIG.xRate[1]) * rate;
     this.yRate = randomFromRange(CONFIG.yRate[0], CONFIG.yRate[1]) * rate;
@@ -57,13 +55,12 @@ class Particle {
     this.size = randomParticleSize(viewportWidth);
 
     proportionalProps.forEach(prop => {
-      this[prop] = proportional(
-        this[prop],
-        BASE_WIDTH,
-        Math.min(viewportWidth, BASE_WIDTH)
-      );
+      this[prop] = proportional(this[prop], BASE_WIDTH,
+        Math.min(viewportWidth, BASE_WIDTH));
     });
 
+    this.color = color;
+    this.image = image;
     this.x = x;
     this.y = y - this.size;
   }
@@ -93,16 +90,11 @@ class Particle {
       this.size, this.size
     );
     ctx.globalCompositeOperation = CONFIG.blendMode;
-    // ctx.globalCompositeOperation = 'lighter';
   }
 }
 
 class Particles {
-  constructor({
-    canvas,
-    image,
-    bgImage
-  }) {
+  constructor({ canvas, image, bgImage }) {
     this.refreshRate = CONFIG.refreshRate / CONFIG.rate;
     this.bgImage = bgImage;
     this.tintedImages = CONFIG.colors.map(color => colorizedImageCanvas(image, color));
@@ -110,7 +102,7 @@ class Particles {
     this.canvas = canvas;
     this.particles = [];
     this.first = true;
-    this.generateNewParticles();
+    this.generateNewParticles(CONFIG.numParticles);
   }
 
   setSize(width, height) {
@@ -146,37 +138,31 @@ class Particles {
   }
 
   draw() {
-    const ctx = this.context;
+    this.drawBackground();
+    this.particles.forEach(particle => particle.draw(this.context));
+    // this.drawBackgroundImage();
+  }
 
+  drawBackground() {
+    const ctx = this.context;
     ctx.globalCompositeOperation = 'source-over';
     ctx.clearRect(0, 0, this.size.width, this.size.height);
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, this.size.width, this.size.height);
-
-    this.particles.forEach(particle => particle.draw(ctx));
-
-    // this.drawBackground();
   }
 
-  drawBackground() {
+  drawBackgroundImage() {
     const ctx = this.context;
 
     ctx.globalCompositeOperation = 'source-atop';
     ctx.globalAlpha = 0.1;
 
-    ctx.drawImage(this.bgImage,
-      0, 0,
+    ctx.drawImage(this.bgImage, 0, 0,
       this.bgImage.width, this.bgImage.height,
-      0, 0,
-      this.canvas.width, this.canvas.height);
+      0, 0, this.canvas.width, this.canvas.height);
   }
 
-  generateNewParticles() {
-    // const count = proportional(
-    //   CONFIG.numParticles, BASE_WIDTH, this.canvas.width
-    // );
-    const count = CONFIG.numParticles;
-
+  generateNewParticles(count) {
     for (let index = 0; index < count; index++) {
       this.addParticle();
     }
@@ -190,7 +176,7 @@ class Particles {
 
     const now = Date.now();
     if (now - this.lastTime >= this.refreshRate) {
-      this.generateNewParticles();
+      this.generateNewParticles(CONFIG.numParticles);
       this.lastTime = now;
     }
 
@@ -206,7 +192,6 @@ class Particles {
     this.lastTime = Date.now();
     this.active = true;
     this.updateAndDraw();
-
   }
 
   destroy() {
