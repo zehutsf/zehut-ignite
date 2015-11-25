@@ -20,6 +20,9 @@ export default class App extends Component {
             </div>
           </div>
           <div className="section-body">
+            <p className="center">
+              <a href={data.ticketUrl} className="button-cta">GET TICKETS</a>
+            </p>
             <p>
               Join us at an after work cocktail party and meetup, featuring a DJ spinning vinyl, Vodka + Latke Bar, Menorah lighting.
             </p>
@@ -49,14 +52,14 @@ export default class App extends Component {
       <Element name="where">
         <div className="section-content">
           <div className="section-headline">
-            Join us at Bespoke
+            Bespoke at Westfield
             <div className="headline-sub">
               845 MARKET STREET, 4th FLOOR
             </div>
           </div>
           <div className="section-body">
             <p>
-              Bespoke is a trifecta of coworking, demo, and event spaces strategically
+              Join us at Bespoke, a trifecta of coworking, demo, and event spaces strategically
 located at Westfield San Francisco in the epicenter of downtown.
             </p>
           </div>
@@ -69,7 +72,16 @@ located at Westfield San Francisco in the epicenter of downtown.
     return (
       <Element name="register">
         <div className="section-content center">
-          <a href="#" className="button-cta">GET TICKETS</a>
+          <div className="section-body">
+            <p className="center">
+              <a href={data.ticketUrl} className="button-cta">GET TICKETS</a>
+            </p>
+            <p>
+              Want to bring your company or team?
+              &nbsp;<a href="mailto:rabbi@jlisf.org">E-mail us</a> for group rate information.
+            </p>
+
+          </div>
         </div>
       </Element>
     );
@@ -86,6 +98,10 @@ located at Westfield San Francisco in the epicenter of downtown.
           {this.renderWho()}
           {this.renderWhere()}
           {this.renderRegister()}
+        </div>
+        <div className="footer">
+          &copy; 2015 Zehut.
+          &nbsp;<a href="http://github.com/zehutsf/zehut-ignite">Code on Github.</a>
         </div>
       </div>
     );
