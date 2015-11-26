@@ -26,7 +26,7 @@ export default class App extends Component {
               <a href={data.ticketUrl} className="button-cta">GET TICKETS</a>
             </p>
             <p>
-              Join us at an after work cocktail party and meetup, featuring a DJ spinning vinyl, Vodka + Latke Bar, Menorah lighting.
+              Join us for a cocktail party and meetup, featuring a DJ spinning vinyl, Vodka + Latke Bar, and Menorah lighting.
             </p>
             <p>
               Our mission is to use the power of community to foster personal and professional development for people with ideas. Startups featuring leaders from our Young Adult community will be on display.
