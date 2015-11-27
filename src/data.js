@@ -1,5 +1,5 @@
 export default {
-  ticketUrl: 'http://zehutignite.eventbrite.com',
+  ticketUrl: 'https://a.zozi.com/#/express/zehutca/products/80293',
   profiles: [
     {
       name: 'Vadim Ogievetsky',
