@@ -7,7 +7,8 @@ import loadImage from '../utils/loadImage';
 export default class ParticleBackground extends Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired
+    height: PropTypes.number.isRequired,
+    config: PropTypes.object
   }
 
   componentDidMount() {
@@ -31,7 +32,13 @@ export default class ParticleBackground extends Component {
   }
 
   initializeParticles(image, bgImage) {
-    this.particleEngine = new ParticleEngine({ canvas: this.canvas, image, bgImage });
+    this.particleEngine = new ParticleEngine({
+      canvas: this.canvas,
+      image,
+      bgImage,
+      config: this.props.config || {}
+    });
+
     this.particleEngine.start();
   }
 

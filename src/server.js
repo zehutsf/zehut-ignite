@@ -10,6 +10,7 @@ import Html from './Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import App from './App';
+import Party from './components/Party';
 
 const pretty = new PrettyError();
 const app = new Express();
@@ -18,7 +19,7 @@ const server = new http.Server(app);
 app.use(compression());
 app.use(Express.static(path.join(__dirname, '..', 'static')));
 
-app.use((req, res) => {
+const renderComponent = (req, res, component) => {
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
@@ -27,7 +28,15 @@ app.use((req, res) => {
 
   res.send('<!doctype html>\n' +
     ReactDOM.renderToString(
-      <Html assets={webpackIsomorphicTools.assets()} component={<App/>}/>));
+      <Html assets={webpackIsomorphicTools.assets()} component={component}/>));
+}
+
+app.get('/party', (req, res) => {
+  renderComponent(req, res, <Party/>);
+});
+
+app.use((req, res) => {
+  renderComponent(req, res, <App/>);
 });
 
 if (config.port) {

@@ -22,8 +22,9 @@ const newConfig = {
 };
 
 const BASE_WIDTH = 1000;
+const BASE_HEIGHT = 500;
 
-const CONFIG = Object.assign({}, defaultConfig, newConfig);
+const GLOBAL_CONFIG = Object.assign({}, defaultConfig, newConfig);
 
 function proportional(n1, d1, d2) {
   return (n1 * d2) / d1;
@@ -47,8 +48,8 @@ function randomFromRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function randomParticleSize(/* viewportWidth */) {
-  return randomFromRange(CONFIG.sizeRange[0], CONFIG.sizeRange[1]);
+function randomParticleSize(config) {
+  return randomFromRange(config.sizeRange[0], config.sizeRange[1]);
 }
 
 const proportionalProps = [
@@ -56,19 +57,25 @@ const proportionalProps = [
 ];
 
 class Particle {
-  constructor({ rate = 1, x, y, color, image, viewportWidth }) {
-    this.alpha = randomFromRange(CONFIG.alphaRange[0], CONFIG.alphaRange[1]);
-    this.xRate = randomFromRange(CONFIG.xRate[0], CONFIG.xRate[1]) * rate;
-    this.yRate = randomFromRange(CONFIG.yRate[0], CONFIG.yRate[1]) * rate;
-    this.alphaDelay = randomFromRange(CONFIG.alphaDelay[0], CONFIG.alphaDelay[1]) / rate;
-    this.alphaRate = randomFromRange(CONFIG.alphaRate[0], CONFIG.alphaRate[1]) * rate;
-    this.size = randomParticleSize(viewportWidth);
+  constructor({ rate = 1, x, y, color, image, viewportWidth, viewportHeight, config }) {
+    this.alpha = randomFromRange(config.alphaRange[0], config.alphaRange[1]);
+    this.xRate = randomFromRange(config.xRate[0], config.xRate[1]) * rate;
+    this.yRate = randomFromRange(config.yRate[0], config.yRate[1]) * rate;
+    this.alphaDelay = proportional(
+        randomFromRange(config.alphaDelay[0], config.alphaDelay[1]) / rate,
+        BASE_HEIGHT,
+        viewportHeight
+    );
+
+    this.alphaRate = randomFromRange(config.alphaRate[0], config.alphaRate[1]) * rate;
+    this.size = randomParticleSize(config, viewportWidth, viewportHeight);
 
     proportionalProps.forEach(prop => {
       this[prop] = proportional(this[prop], BASE_WIDTH,
         Math.min(viewportWidth, BASE_WIDTH));
     });
 
+    this.config = config;
     this.color = color;
     this.image = image;
     this.x = x;
@@ -99,20 +106,21 @@ class Particle {
       this.x, this.y,
       this.size, this.size
     );
-    ctx.globalCompositeOperation = CONFIG.blendMode;
+    ctx.globalCompositeOperation = this.config.blendMode;
   }
 }
 
 class Particles {
-  constructor({ canvas, image, bgImage }) {
-    this.refreshRate = CONFIG.refreshRate / CONFIG.rate;
+  constructor({ canvas, image, bgImage, config = {} }) {
+    this.config = Object.assign({}, GLOBAL_CONFIG, config);
+    this.refreshRate = this.config.refreshRate / this.config.rate;
     this.bgImage = bgImage;
-    this.tintedImages = CONFIG.colors.map(color => colorizedImageCanvas(image, color));
+    this.tintedImages = this.config.colors.map(color => colorizedImageCanvas(image, color));
     this.size = { width: canvas.width, height: canvas.height };
     this.canvas = canvas;
     this.particles = [];
     this.first = true;
-    this.generateNewParticles(CONFIG.numParticles);
+    this.generateNewParticles(this.config.numParticles);
   }
 
   setSize(width, height) {
@@ -128,7 +136,9 @@ class Particles {
       y: this.first ? randomFromRange(0, this.size.height * 0.5) : randomFromRange(-200, -100),
       image: randomImage,
       viewportWidth: this.size.width,
-      rate: CONFIG.rate
+      viewportHeight: this.size.height,
+      rate: this.config.rate,
+      config: this.config
     }));
   }
 
@@ -186,7 +196,7 @@ class Particles {
 
     const now = Date.now();
     if (now - this.lastTime >= this.refreshRate) {
-      this.generateNewParticles(CONFIG.numParticles);
+      this.generateNewParticles(this.config.numParticles);
       this.lastTime = now;
     }
 
