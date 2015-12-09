@@ -5,9 +5,16 @@ import 'babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Party from './components/Party';
+
+// Sophisticated routing :)
+let component = <App/>;
+if (window.location.pathname.indexOf('party') > -1) {
+  component = <Party/>;
+}
 
 const dest = document.getElementById('content');
-ReactDOM.render(<App/>, dest);
+ReactDOM.render(component, dest);
 
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
